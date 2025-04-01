@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
@@ -14,14 +15,67 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #f5f5f5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.start-container {
+  max-width: 600px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.start-button, .restart-button {
+  background-color: #4caf50;
   color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.start-button:hover, .restart-button:hover {
+  background-color: #45a049;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.crossword-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.clues-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .App-link {
