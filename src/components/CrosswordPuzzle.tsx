@@ -46,11 +46,25 @@ const CrosswordPuzzle: React.FC<CrosswordPuzzleProps> = ({ grid, userInputs, onL
       col < grid.cells[0].length && 
       grid.cells[row][col].isActive
     ) {
-      const cellElement = document.getElementById(`cell-input-${row}-${col}`);
+      const cellElement = document.getElementById(`cell-input-${row}-${col}`) as HTMLInputElement;
       if (cellElement) {
         cellElement.focus();
+        // Select the text in the cell
+        cellElement.select();
       }
     }
+  };
+
+  // Helper to render word number(s)
+  const renderWordNumber = (wordNumber: number | number[] | undefined) => {
+    if (wordNumber === undefined) return null;
+    
+    if (Array.isArray(wordNumber)) {
+      // Display multiple numbers with a slash between them for better readability
+      return <span className="cell-number">{wordNumber.join('/')}</span>;
+    }
+    
+    return <span className="cell-number">{wordNumber}</span>;
   };
 
   return (
@@ -64,9 +78,7 @@ const CrosswordPuzzle: React.FC<CrosswordPuzzleProps> = ({ grid, userInputs, onL
             >
               {cell.isActive ? (
                 <>
-                  {cell.wordNumber && (
-                    <span className="cell-number">{cell.wordNumber}</span>
-                  )}
+                  {renderWordNumber(cell.wordNumber)}
                   <input 
                     id={`cell-input-${rowIndex}-${colIndex}`}
                     type="text"
@@ -75,6 +87,7 @@ const CrosswordPuzzle: React.FC<CrosswordPuzzleProps> = ({ grid, userInputs, onL
                     onKeyDown={(e) => handleKeyDown(rowIndex, colIndex, e)}
                     maxLength={1}
                     className="cell-input"
+                    onFocus={(e) => e.target.select()}
                   />
                 </>
               ) : null}

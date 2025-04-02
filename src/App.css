@@ -90,3 +90,28 @@ h1 {
     transform: rotate(360deg);
   }
 }
+
+/* Desktop layout - clues on right side */
+@media (min-width: 768px) {
+  .game-area {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .crossword-container {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .clues-container {
+    flex: 1;
+    max-width: 400px;
+    align-self: stretch;
+    overflow-y: auto;
+    max-height: 600px;
+  }
+}

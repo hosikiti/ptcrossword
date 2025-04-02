@@ -17,13 +17,14 @@ const WordClues: React.FC<WordCluesProps> = ({ words, isWordComplete }) => {
       <div className="clues-section">
         <h3>Horizontal</h3>
         <ul>
-          {horizontalWords.map((word, index) => {
+          {horizontalWords.map((word) => {
             const wordIndex = words.findIndex(w => w.number === word.number);
             const complete = isWordComplete(wordIndex);
             
             return (
               <li key={`h-${word.number}`} className={complete ? 'complete' : ''}>
-                <span className="clue-number">{word.number}.</span> {word.clue}
+                <span className="clue-number">{word.number}.</span>
+                <span className="clue-text">{word.clue}</span>
                 {complete && <span className="check-mark">✓</span>}
               </li>
             );
@@ -34,13 +35,14 @@ const WordClues: React.FC<WordCluesProps> = ({ words, isWordComplete }) => {
       <div className="clues-section">
         <h3>Vertical</h3>
         <ul>
-          {verticalWords.map((word, index) => {
+          {verticalWords.map((word) => {
             const wordIndex = words.findIndex(w => w.number === word.number);
             const complete = isWordComplete(wordIndex);
             
             return (
               <li key={`v-${word.number}`} className={complete ? 'complete' : ''}>
-                <span className="clue-number">{word.number}.</span> {word.clue}
+                <span className="clue-number">{word.number}.</span>
+                <span className="clue-text">{word.clue}</span>
                 {complete && <span className="check-mark">✓</span>}
               </li>
             );

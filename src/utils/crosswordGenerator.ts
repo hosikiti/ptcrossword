@@ -16,7 +16,7 @@ export interface CrosswordWord {
 export interface CrosswordCell {
   letter: string | null;
   isActive: boolean;
-  wordNumber?: number;
+  wordNumber?: number | number[];
 }
 
 export interface CrosswordGrid {
@@ -497,11 +497,39 @@ function placeWord(
     const currentRow = direction === 'horizontal' ? row : row + i;
     const currentCol = direction === 'horizontal' ? col + i : col;
     
-    grid[currentRow][currentCol] = {
-      letter: word[i],
-      isActive: true,
-      wordNumber: i === 0 ? wordNumber : (grid[currentRow][currentCol].wordNumber || undefined)
-    };
+    const currentCell = grid[currentRow][currentCol];
+    
+    // For the first letter of the word
+    if (i === 0) {
+      // If the cell already has a different word number, store both
+      if (currentCell && currentCell.isActive && currentCell.wordNumber !== undefined) {
+        // If wordNumber is already an array, add to it
+        if (Array.isArray(currentCell.wordNumber)) {
+          if (!currentCell.wordNumber.includes(wordNumber)) {
+            currentCell.wordNumber.push(wordNumber);
+          }
+        } else {
+          // Convert to array if it's a single number and different from new number
+          if (currentCell.wordNumber !== wordNumber) {
+            currentCell.wordNumber = [currentCell.wordNumber, wordNumber];
+          }
+        }
+      } else {
+        // First word at this position
+        grid[currentRow][currentCol] = {
+          letter: word[i],
+          isActive: true,
+          wordNumber: wordNumber
+        };
+      }
+    } else {
+      // For the rest of the letters, just set them active without changing word number
+      grid[currentRow][currentCol] = {
+        letter: word[i],
+        isActive: true,
+        wordNumber: currentCell && currentCell.isActive ? currentCell.wordNumber : undefined
+      };
+    }
   }
 }
 

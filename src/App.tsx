@@ -67,7 +67,7 @@ function App() {
         ) : (
           <div className="game-container">
             {crosswordGrid && (
-              <>
+              <div className="game-area">
                 <div className="crossword-container">
                   <CrosswordPuzzle 
                     grid={crosswordGrid} 
@@ -81,7 +81,7 @@ function App() {
                     isWordComplete={isWordComplete}
                   />
                 </div>
-              </>
+              </div>
             )}
             <button className="restart-button" onClick={startGame}>
               Nova Palavras Cruzadas
